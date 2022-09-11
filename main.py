@@ -44,4 +44,4 @@ if __name__ == '__main__':
         allert = price_signal(last_price, PRICE_SETPOINT)
 
         if allert:
-            toast.show_toast(title=f"Price {ASSET_1}/{ASSET_2} allert!", msg=f'Last price {ASSET_1}/{ASSET_2} reached {PRICE_SETPOINT}!',duration=30)
+            toast.show_toast(title=f"Price {ASSET_1}/{ASSET_2} allert!", msg=f'Last price {ASSET_1}/{ASSET_2} reached {PRICE_SETPOINT}! Last price = {last_price}',duration=30)
