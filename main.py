@@ -1,7 +1,11 @@
 import pywaves as pw
 from constants import *
-from config import *
-import datetime, win10toast
+import datetime, win10toast, json
+
+def get_config():
+    with open("./config.json") as f:
+        config = json.load(f)
+    return config
 
 def get_assets_pair(asset1_name:str, asset2_name:str):
     """
@@ -30,18 +34,36 @@ def get_last_price(pair:object, req_period:int):
 
     return float(pair.last())
 
-def price_signal(last_price, price_setpoint):
-    if last_price >= price_setpoint:
-        return True
+def price_signal(last_price, price_sp_high, price_sp_low):
+    if last_price >= price_sp_high:
+        return "high"
+    elif last_price <= price_sp_low:
+        return "low"
 
 if __name__ == '__main__':
+
+    config = get_config()
+
+    SP_HIGH = config["price_sp_high"]
+    SP_LOW = config["price_sp_low"]
+    ASSET_1 = config["asset_1"]
+    ASSET_2 = config["asset_2"]
+    SERVER_REQUEST_PERIOD = config["req_period"]
 
     toast = win10toast.ToastNotifier()
     asset_pair = get_assets_pair(ASSET_1, ASSET_2)
 
     while True:
-        last_price = get_last_price(asset_pair, SERVER_REQUEST_PERIOD)
-        allert = price_signal(last_price, PRICE_SETPOINT)
 
-        if allert:
-            toast.show_toast(title=f"Price {ASSET_1}/{ASSET_2} allert!", msg=f'Last price {ASSET_1}/{ASSET_2} reached {PRICE_SETPOINT}! Last price = {last_price}',duration=30)
+        last_price = get_last_price(asset_pair, SERVER_REQUEST_PERIOD)
+
+        allert = price_signal(last_price, SP_HIGH, SP_LOW)
+
+        price_setpoint = None
+        if allert == "high":
+            price_setpoint = SP_HIGH
+        elif allert == "low":
+            price_setpoint = SP_LOW
+
+        if price_setpoint is not None:
+            toast.show_toast(title=f"Price {ASSET_1}/{ASSET_2} allert {allert.upper()}!", msg=f'Last price {ASSET_1}/{ASSET_2} reached {price_setpoint}! Last price = {last_price}',duration=30)
