@@ -1,9 +1,9 @@
 import pywaves as pw
 from constants import *
-import datetime, win10toast, json
+import datetime, win10toast, json, traceback
 
 def get_config():
-    with open("./config.json") as f:
+    with open("config.json") as f:
         config = json.load(f)
     return config
 
@@ -23,7 +23,7 @@ def get_last_price(pair:object, req_period:int):
     """
     :param pair: AssetPair object
     :param req_period: server request period (sec)
-    :return:
+    :return: last price
     """
     start_timestamp = datetime.datetime.now().timestamp()
 
@@ -54,16 +54,20 @@ if __name__ == '__main__':
     asset_pair = get_assets_pair(ASSET_1, ASSET_2)
 
     while True:
+        try:
+            last_price = get_last_price(asset_pair, SERVER_REQUEST_PERIOD)
+            allert = price_signal(last_price, SP_HIGH, SP_LOW)
 
-        last_price = get_last_price(asset_pair, SERVER_REQUEST_PERIOD)
+            price_setpoint = None
+            if allert == "high":
+                price_setpoint = SP_HIGH
+            elif allert == "low":
+                price_setpoint = SP_LOW
 
-        allert = price_signal(last_price, SP_HIGH, SP_LOW)
+            if price_setpoint is not None:
+                toast.show_toast(title=f"Price {ASSET_1}/{ASSET_2} allert {allert.upper()}!", msg=f'Last price {ASSET_1}/{ASSET_2} reached {price_setpoint}! Last price = {last_price}',duration=30)
 
-        price_setpoint = None
-        if allert == "high":
-            price_setpoint = SP_HIGH
-        elif allert == "low":
-            price_setpoint = SP_LOW
+        except Exception as e:
+            print('Error:\n', traceback.format_exc())
 
-        if price_setpoint is not None:
-            toast.show_toast(title=f"Price {ASSET_1}/{ASSET_2} allert {allert.upper()}!", msg=f'Last price {ASSET_1}/{ASSET_2} reached {price_setpoint}! Last price = {last_price}',duration=30)
+
