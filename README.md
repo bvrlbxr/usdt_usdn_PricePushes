@@ -12,8 +12,8 @@ push allert in windows when target price reached on waves.exchange (last price).
   "price_sp_low" : 1.02  // setpoint low price
 }
 ```
-## compile
-to compile with pyinstaller in windows:    
+## compile with pyinstaller
+to compile in windows:    
 `pyinstaller -D --additional-hooks-dir <hooks dir> --add-data "config.json;." main.py`
 
 ## Result
