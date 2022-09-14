@@ -1,6 +1,6 @@
 # usdt_usdn_PricePushes
 
-push allert in windows when target price reached on waves.exchange (last price).
+push notification allert in windows when target price reached on waves.exchange (last price).
 
 ## config.json:
 ``` 
