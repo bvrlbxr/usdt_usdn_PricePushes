@@ -31,6 +31,7 @@ def get_last_price(pair:object, req_period:int):
         cur_timestamp = datetime.datetime.now().timestamp()
         if cur_timestamp - start_timestamp > req_period:
             break
+        time.sleep(1)  # to decrease processor load
 
     return float(pair.last())
 
