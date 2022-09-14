@@ -67,9 +67,9 @@ if __name__ == '__main__':
             if price_setpoint is not None:
                 toast.show_toast(title=f"Price {ASSET_1}/{ASSET_2} allert {allert.upper()}!", msg=f'Last price {ASSET_1}/{ASSET_2} reached {price_setpoint}! Last price = {last_price}',duration=30)
 
-            time.sleep(0.3)  # to decrease processor load
-
         except Exception as e:
             print('Error:\n', traceback.format_exc())
+
+        time.sleep(1)  # to decrease processor load
 
 
