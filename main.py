@@ -2,6 +2,7 @@ import pywaves as pw
 from constants import *
 import datetime, win10toast, json, traceback, time
 
+
 def get_config():
     with open("config.json") as f:
         config = json.load(f)
@@ -57,6 +58,7 @@ if __name__ == '__main__':
     while True:
         try:
             last_price = get_last_price(asset_pair, SERVER_REQUEST_PERIOD)
+            print(f"""{datetime.datetime.now().strftime("%y.%m.%d %H:%M:%S")} Last_price = {last_price}""")
             allert = price_signal(last_price, SP_HIGH, SP_LOW)
 
             price_setpoint = None
