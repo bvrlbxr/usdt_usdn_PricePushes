@@ -58,7 +58,7 @@ if __name__ == '__main__':
     while True:
         try:
             last_price = get_last_price(asset_pair, SERVER_REQUEST_PERIOD)
-            print(f"""{datetime.datetime.now().strftime("%y.%m.%d %H:%M:%S")} Last_price = {last_price}""")
+            print(f"""{datetime.datetime.now().strftime("%y.%m.%d %H:%M:%S")} Last_price {ASSET_1}/{ASSET_2} = {last_price}""")
             allert = price_signal(last_price, SP_HIGH, SP_LOW)
 
             price_setpoint = None
