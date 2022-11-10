@@ -1,7 +1,7 @@
 {
-  "req_period" : 3,
-  "asset_1" : "USDT",
+  "req_period" : 30,
+  "asset_1" : "BUSD",
   "asset_2" : "USDN",
-  "price_sp_high" : 1.03,
-  "price_sp_low" : 1.01
+  "price_sp_high" : 1.105,
+  "price_sp_low" : 1.02
 }

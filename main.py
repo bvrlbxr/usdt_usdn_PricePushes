@@ -2,6 +2,16 @@ import pywaves as pw
 from constants import *
 import datetime, win10toast, json, traceback, time
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    GREEN = '\033[92m'
+    WARNING = '\033[93m'
+    RED = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
 def get_config():
     with open("config.json") as f:
@@ -42,6 +52,15 @@ def price_signal(last_price, price_sp_high, price_sp_low):
     elif last_price <= price_sp_low:
         return "low"
 
+
+def change_percent(prev_price, cur_price):
+    if cur_price > prev_price:
+        percent_allert = f"""{bcolors.GREEN} {round(((cur_price - prev_price) / prev_price) * 100, 3)}% \u25B2"""
+    else:
+        percent_allert = f"""{bcolors.RED} {round(((cur_price - prev_price) / prev_price) * 100, 3)}% \u25BC"""
+
+    return percent_allert
+
 if __name__ == '__main__':
 
     config = get_config()
@@ -56,11 +75,16 @@ if __name__ == '__main__':
     asset_pair = get_assets_pair(ASSET_1, ASSET_2)
 
     new_price = None
+    percent = "0%"
     while True:
         try:
             last_price = get_last_price(asset_pair, SERVER_REQUEST_PERIOD)
             if last_price != new_price:
-                print(f"""{datetime.datetime.now().strftime("%y.%m.%d %H:%M:%S")} Last price {ASSET_1}/{ASSET_2} = {last_price}""")
+
+                if new_price is not None:
+                    percent = change_percent(new_price,last_price)  # change in percent
+
+                print(f"""{datetime.datetime.now().strftime("%H:%M:%S %d.%m.%y")} Last price {ASSET_1}/{ASSET_2} : {last_price}. {percent}""")
                 allert = price_signal(last_price, SP_HIGH, SP_LOW)
 
                 price_setpoint = None
