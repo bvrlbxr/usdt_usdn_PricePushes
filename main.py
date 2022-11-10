@@ -55,20 +55,24 @@ if __name__ == '__main__':
     toast = win10toast.ToastNotifier()
     asset_pair = get_assets_pair(ASSET_1, ASSET_2)
 
+    new_price = None
     while True:
         try:
             last_price = get_last_price(asset_pair, SERVER_REQUEST_PERIOD)
-            print(f"""{datetime.datetime.now().strftime("%y.%m.%d %H:%M:%S")} Last_price {ASSET_1}/{ASSET_2} = {last_price}""")
-            allert = price_signal(last_price, SP_HIGH, SP_LOW)
+            if last_price != new_price:
+                print(f"""{datetime.datetime.now().strftime("%y.%m.%d %H:%M:%S")} Last price {ASSET_1}/{ASSET_2} = {last_price}""")
+                allert = price_signal(last_price, SP_HIGH, SP_LOW)
 
-            price_setpoint = None
-            if allert == "high":
-                price_setpoint = SP_HIGH
-            elif allert == "low":
-                price_setpoint = SP_LOW
+                price_setpoint = None
+                if allert == "high":
+                    price_setpoint = SP_HIGH
+                elif allert == "low":
+                    price_setpoint = SP_LOW
 
-            if price_setpoint is not None:
-                toast.show_toast(title=f"Price {ASSET_1}/{ASSET_2} allert {allert.upper()}!", msg=f'Last price {ASSET_1}/{ASSET_2} reached {price_setpoint}! Last price = {last_price}',duration=30)
+                if price_setpoint is not None:
+                    toast.show_toast(title=f"Price {ASSET_1}/{ASSET_2} allert {allert.upper()}!", msg=f'Last price {ASSET_1}/{ASSET_2} reached {price_setpoint}! Last price = {last_price}',duration=30)
+
+                new_price = last_price
 
         except Exception as e:
             print('Error:\n', traceback.format_exc())
