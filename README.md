@@ -1,4 +1,4 @@
-# usdt_usdn_PricePushes
+# wx_Price allerts Pushes
 
 push notification allert in windows when target price reached on waves.exchange (last price).
 
