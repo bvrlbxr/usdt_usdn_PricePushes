@@ -1,6 +1,7 @@
 import pywaves as pw
 from constants import *
 import datetime, win10toast, json, traceback, time
+import os
 
 class bcolors:
     HEADER = '\033[95m'
@@ -63,6 +64,7 @@ def change_percent(prev_price, cur_price):
 
 if __name__ == '__main__':
 
+
     config = get_config()
 
     SP_HIGH = config["price_sp_high"]
@@ -76,7 +78,10 @@ if __name__ == '__main__':
 
     new_price = None
     percent = "0%"
+    os.system('')  # for colours working in terminal
+
     while True:
+
         try:
             last_price = get_last_price(asset_pair, SERVER_REQUEST_PERIOD)
             if last_price != new_price:
