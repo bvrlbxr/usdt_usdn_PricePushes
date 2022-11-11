@@ -77,7 +77,7 @@ if __name__ == '__main__':
     asset_pair = get_assets_pair(ASSET_1, ASSET_2)
 
     new_price = None
-    percent = "0%"
+    percent = ""
 
 
     while True:
