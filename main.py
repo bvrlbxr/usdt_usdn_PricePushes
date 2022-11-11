@@ -78,7 +78,7 @@ if __name__ == '__main__':
 
     new_price = None
     percent = "0%"
-    os.system('')  # for colours working in terminal
+
 
     while True:
 
@@ -88,7 +88,7 @@ if __name__ == '__main__':
 
                 if new_price is not None:
                     percent = change_percent(new_price,last_price)  # change in percent
-
+                os.system('')  # for colours working in terminal
                 print(f"""{datetime.datetime.now().strftime("%H:%M:%S %d.%m.%y")} Last price {ASSET_1}/{ASSET_2} : {last_price}. {percent}""")
                 allert = price_signal(last_price, SP_HIGH, SP_LOW)
 
