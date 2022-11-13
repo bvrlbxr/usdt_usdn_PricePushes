@@ -1,5 +1,5 @@
 {
-  "req_period" : 30,
+  "req_period" : 1,
   "asset_1" : "BUSD",
   "asset_2" : "USDN",
   "price_sp_high" : 1.105,
