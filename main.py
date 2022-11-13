@@ -55,7 +55,7 @@ def price_signal(last_price, price_sp_high, price_sp_low):
 
 
 def change_percent(prev_price, cur_price):
-    os.system('')  # for colours working in terminal
+
     if cur_price > prev_price:
         percent_allert = f"""{bcolors.GREEN} {round(((cur_price - prev_price) / prev_price) * 100, 3)}% \u25B2"""
     else:
@@ -86,7 +86,7 @@ if __name__ == '__main__':
         try:
             last_price = get_last_price(asset_pair, SERVER_REQUEST_PERIOD)
             if last_price != new_price:
-
+                os.system('')  # for colours working in terminal
                 if new_price is not None:
                     percent = change_percent(new_price,last_price)  # change in percent
 
