@@ -90,7 +90,7 @@ if __name__ == '__main__':
                 if new_price is not None:
                     percent = change_percent(new_price,last_price)  # change in percent
 
-                print(f"""{bcolors.ENDC} {datetime.datetime.now().strftime("%H:%M:%S %d.%m.%y")} Last price {ASSET_1}/{ASSET_2} : {last_price}. {percent}""")
+                print(f"""{bcolors.ENDC}{datetime.datetime.now().strftime("%H:%M:%S %d.%m.%y")} Last price {ASSET_1}/{ASSET_2}: {last_price}. {percent:>56}""")
                 allert = price_signal(last_price, SP_HIGH, SP_LOW)
 
                 price_setpoint = None
@@ -105,7 +105,7 @@ if __name__ == '__main__':
                 new_price = last_price
 
         except Exception as e:
-            print('Error:\n', traceback.format_exc())
+            print(f'{bcolors.RED}Error:\n {traceback.format_exc()}')
 
         time.sleep(1)  # to decrease processor load
 
