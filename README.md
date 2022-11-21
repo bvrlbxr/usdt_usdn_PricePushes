@@ -18,4 +18,5 @@ to compile in windows:
 
 ## Result
 ![push allert](https://user-images.githubusercontent.com/28018394/189945050-c7d9a1fb-faad-4f4c-a53a-bff058488e85.png)
-<img width="362" alt="terminal" src="https://user-images.githubusercontent.com/28018394/201660296-7a973df4-c4fb-4bf5-927d-ed9151529734.png">
+![изображение](https://user-images.githubusercontent.com/28018394/202984015-955b59a8-e121-476f-b2cd-050ace10c8ac.png)
+
