@@ -57,9 +57,9 @@ def price_signal(last_price, price_sp_high, price_sp_low):
 def change_percent(prev_price, cur_price):
 
     if cur_price > prev_price:
-        percent_allert = f"""{bcolors.GREEN} {round(((cur_price - prev_price) / prev_price) * 100, 3)}% \u25B2"""
+        percent_allert = f"""{bcolors.GREEN} {(abs(cur_price - prev_price) / prev_price * 100):.3f}% \u25B2"""
     else:
-        percent_allert = f"""{bcolors.RED} {round(((cur_price - prev_price) / prev_price) * 100, 3)}% \u25BC"""
+        percent_allert = f"""{bcolors.RED} {(abs(cur_price - prev_price) / prev_price * 100):.3f}% \u25BC"""
 
     return percent_allert
 
@@ -90,7 +90,7 @@ if __name__ == '__main__':
                 if new_price is not None:
                     percent = change_percent(new_price,last_price)  # change in percent
 
-                print(f"""{bcolors.ENDC}{datetime.datetime.now().strftime("%H:%M:%S %d.%m.%y")} Last price {ASSET_1}/{ASSET_2}: {last_price}. {percent:>56}""")
+                print(f"""{bcolors.ENDC}{datetime.datetime.now().strftime("%H:%M:%S %d.%m.%y")} Last price {ASSET_1}/{ASSET_2}: {last_price:.5f}. {percent}""")
                 allert = price_signal(last_price, SP_HIGH, SP_LOW)
 
                 price_setpoint = None

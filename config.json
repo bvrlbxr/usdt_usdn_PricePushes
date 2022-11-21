@@ -1,7 +1,7 @@
 {
-  "req_period" : 1,
-  "asset_1" : "WAVES",
-  "asset_2" : "BUSD",
-  "price_sp_high" : 1.105,
-  "price_sp_low" : 1.02
+  "req_period" : 0.2,
+  "asset_1" : "BUSD",
+  "asset_2" : "USDN",
+  "price_sp_high" : 1.2,
+  "price_sp_low" : 1.06
 }
